@@ -1,0 +1,24 @@
+.admin-suite {
+  position: fixed; inset: 0; z-index: 9500;
+  background: #05070d; padding: 22px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.admin-head { display:flex; align-items:center; justify-content:space-between; }
+.admin-head h2 { margin:0; font-size:20px; color:#fff; }
+.admin-tabs { display:flex; gap:8px; }
+.admin-tabs .tab {
+  padding:8px 14px; border-radius:10px; cursor:pointer;
+  background:transparent; color:#94a3b8; border:1px solid rgba(148,163,184,.16);
+}
+.admin-tabs .tab.active { color:#fff; border-color:#38bdf8; background:rgba(56,189,248,.12); }
+.admin-body { flex:1; overflow:auto; border:1px solid rgba(148,163,184,.16); border-radius:14px; padding:18px; background:rgba(15,20,34,.55); }
+.tab-pane { display:none; }
+.tab-pane.active { display:block; }
+.add-link { display:grid; grid-template-columns: 2fr 1fr 90px auto; gap:8px; margin-bottom:16px; }
+.add-link input, .add-link select {
+  background:rgba(2,6,23,.65); color:#fff; border:1px solid rgba(148,163,184,.16);
+  padding:10px; border-radius:10px;
+}
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th, td { text-align:left; padding:10px 8px; border-bottom:1px solid rgba(148,163,184,.1); }
+.switch { display:flex; gap:10px; align-items:center; color:#cbd5e1; }
