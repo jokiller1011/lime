@@ -1,0 +1,45 @@
+/* ── Full-screen loading overlay ───────────────────────── */
+.loader {
+  position: fixed; inset: 0;
+  background: #05070d;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 22px; z-index: 9000;
+  transition: opacity .45s ease, visibility .45s ease;
+}
+.loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+/* ── 4-dot spinner ─────────────────────────────────────── */
+.spinner {
+  position: relative;
+  width: 64px; height: 64px;
+  animation: spin 1.2s linear infinite;
+}
+.spinner .circle {
+  position: absolute;
+  width: 14px; height: 14px;
+  background: #38bdf8;
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(56,189,248,.75);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+.spinner .circle:nth-child(1) { top: 0;  left: 50%; margin-left: -7px; animation-delay: 0s;   }
+.spinner .circle:nth-child(2) { top: 50%; right: 0;  margin-top: -7px; animation-delay: .3s; }
+.spinner .circle:nth-child(3) { bottom: 0; left: 50%; margin-left: -7px; animation-delay: .6s; }
+.spinner .circle:nth-child(4) { top: 50%; left: 0;  margin-top: -7px; animation-delay: .9s; }
+
+@keyframes spin  { to { transform: rotate(360deg); } }
+@keyframes pulse {
+  0%,100% { transform: scale(.45); opacity: .45; }
+  50%     { transform: scale(1);   opacity: 1;   }
+}
+
+.loader-caption {
+  color: #cbd5e1;
+  font: 500 14px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: .3px;
+  min-height: 20px;
+  text-align: center;
+  transition: opacity .2s ease;
+}
+.loader-caption.fade { opacity: 0; }
