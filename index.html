@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+<title>Freedom's Arcade — Link Generator</title>
+<link rel="stylesheet" href="css/loading.css" />
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+  <!-- ── Loading overlay ─────────────────────────────── -->
+  <div id="loader" class="loader">
+    <div class="spinner">
+      <span class="circle"></span>
+      <span class="circle"></span>
+      <span class="circle"></span>
+      <span class="circle"></span>
+    </div>
+    <p id="loader-caption" class="loader-caption">initializing</p>
+  </div>
+
+  <!-- ── Particle canvas ─────────────────────────────── -->
+  <canvas id="particles" aria-hidden="true"></canvas>
+
+  <!-- ── Main app shell ──────────────────────────────── -->
+  <main id="app" class="app hidden">
+    <header class="brand">
+      <h1><span class="white">Freedom's Arcade</span> <span class="sky">Link Gen</span></h1>
+      <p class="tagline">Choose your filter. Get your link. Get in.</p>
+    </header>
+
+    <section class="panel">
+      <button id="generate-btn" class="btn-primary">Generate Link</button>
+      <p id="linkgen-status" class="status"></p>
+
+      <div id="result" class="result hidden">
+        <label>Your link</label>
+        <div class="link-row">
+          <input id="result-link" readonly />
+          <button id="copy-btn" class="btn-ghost">Copy</button>
+          <button id="open-btn" class="btn-ghost">Open</button>
+        </div>
+
+        <div class="feedback">
+          <span>Did it work?</span>
+          <button id="worked-btn" class="btn-ok">Yes, it worked</button>
+          <button id="blocked-btn" class="btn-bad">No, it's blocked</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <span>© Freedom Freaks</span>
+    </footer>
+
+    <!-- hidden admin trigger zone -->
+    <div id="admin-trigger" class="admin-trigger" aria-hidden="true"></div>
+  </main>
+
+  <!-- ── Filter modal ────────────────────────────────── -->
+  <div id="filter-modal" class="modal hidden">
+    <div class="modal-card">
+      <h2>Which filter are you behind?</h2>
+      <div class="filter-grid">
+        <button class="filter-opt" data-filter="linewize">Linewize</button>
+        <button class="filter-opt" data-filter="lightspeed">Lightspeed</button>
+        <button class="filter-opt" data-filter="other">Other / Unknown</button>
+      </div>
+      <button id="filter-cancel" class="btn-ghost">Cancel</button>
+    </div>
+  </div>
+
+  <!-- ── Admin auth modal ────────────────────────────── -->
+  <div id="admin-auth" class="modal hidden">
+    <div class="modal-card">
+      <h2>Admin Sign In</h2>
+      <button id="oauth-discord" class="btn-oauth discord">Continue with Discord</button>
+      <button id="oauth-github"  class="btn-oauth github">Continue with GitHub</button>
+      <button id="admin-auth-cancel" class="btn-ghost">Cancel</button>
+    </div>
+  </div>
+
+  <!-- ── Admin suite ─────────────────────────────────── -->
+  <div id="admin-suite" class="admin-suite hidden">
+    <header class="admin-head">
+      <h2>Admin Suite</h2>
+      <button id="admin-close" class="btn-ghost">Close</button>
+    </header>
+
+    <div class="admin-tabs">
+      <button class="tab active" data-tab="links">Links</button>
+      <button class="tab" data-tab="reports">Reports</button>
+      <button class="tab" data-tab="config">Config</button>
+    </div>
+
+    <section class="admin-body">
+      <div class="tab-pane active" data-pane="links">
+        <form id="add-link-form" class="add-link">
+          <input id="new-link-url"    placeholder="https://..." required />
+          <select id="new-link-filter">
+            <option value="any">Any filter</option>
+            <option value="linewize">Linewize</option>
+            <option value="lightspeed">Lightspeed</option>
+            <option value="other">Other</option>
+          </select>
+          <input id="new-link-strength" type="number" min="0" max="10" value="0" />
+          <button type="submit" class="btn-primary">Add link</button>
+        </form>
+        <table id="links-table"><tbody></tbody></table>
+      </div>
+
+      <div class="tab-pane" data-pane="reports">
+        <table id="reports-table"><tbody></tbody></table>
+      </div>
+
+      <div class="tab-pane" data-pane="config">
+        <label class="switch">
+          <input type="checkbox" id="toggle-linkgen" />
+          <span>Link Gen Enabled</span>
+        </label>
+      </div>
+    </section>
+  </div>
+
+  <!-- ── Scripts (order matters) ─────────────────────── -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
