@@ -1,0 +1,109 @@
+:root {
+  --bg: #05070d;
+  --panel: rgba(15, 20, 34, .72);
+  --border: rgba(148, 163, 184, .16);
+  --text: #e2e8f0;
+  --muted: #94a3b8;
+  --sky: #38bdf8;
+  --sky-glow: rgba(56, 189, 248, .35);
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  height: 100%; overflow: hidden;
+  background: var(--bg); color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+.hidden { display: none !important; }
+
+#particles {
+  position: fixed; inset: 0;
+  z-index: 1; pointer-events: none;
+}
+
+.app {
+  position: relative; z-index: 2;
+  height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 24px; gap: 28px;
+}
+.brand { text-align: center; }
+.brand h1 { font-size: clamp(28px, 5vw, 48px); margin: 0 0 6px; letter-spacing: -.5px; }
+.brand .white { color: #fff; }
+.brand .sky   { color: var(--sky); text-shadow: 0 0 20px var(--sky-glow); }
+.tagline { color: var(--muted); margin: 0; font-size: 14px; }
+
+.panel {
+  width: min(560px, 92vw);
+  padding: 26px;
+  border-radius: 18px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  text-align: center;
+}
+
+.btn-primary {
+  border: 1px solid rgba(56,189,248,.55);
+  background: linear-gradient(180deg, rgba(56,189,248,.18), rgba(56,189,248,.05));
+  color: #fff; font-weight: 600;
+  padding: 12px 22px; border-radius: 12px;
+  cursor: pointer; transition: transform .12s, box-shadow .2s;
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 24px var(--sky-glow); }
+.btn-ghost {
+  background: transparent; color: var(--muted);
+  border: 1px solid var(--border); padding: 10px 14px;
+  border-radius: 10px; cursor: pointer;
+}
+.btn-ghost:hover { color: #fff; border-color: var(--sky); }
+.btn-ok  { background: rgba(34,197,94,.15);  border: 1px solid rgba(34,197,94,.55);  color:#86efac; padding:10px 14px; border-radius:10px; cursor:pointer; }
+.btn-bad { background: rgba(239,68,68,.15);  border: 1px solid rgba(239,68,68,.55);  color:#fca5a5; padding:10px 14px; border-radius:10px; cursor:pointer; }
+
+.status { color: var(--muted); min-height: 20px; font-size: 13px; margin: 14px 0 0; }
+.result { margin-top: 20px; text-align: left; }
+.result label { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; }
+.link-row { display: flex; gap: 8px; margin-top: 8px; }
+.link-row input {
+  flex: 1; padding: 12px;
+  background: rgba(2,6,23,.65); color: #fff;
+  border: 1px solid var(--border); border-radius: 10px;
+  font-family: ui-monospace, monospace; font-size: 13px;
+}
+.feedback { margin-top: 16px; display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); flex-wrap: wrap; }
+
+.foot { position: fixed; bottom: 14px; color: #475569; font-size: 12px; z-index: 2; }
+
+/* modal */
+.modal {
+  position: fixed; inset: 0; z-index: 8000;
+  background: rgba(2,6,23,.7);
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(6px);
+}
+.modal-card {
+  width: min(420px, 92vw);
+  background: #0b1220; border: 1px solid var(--border);
+  border-radius: 16px; padding: 26px; text-align: center;
+}
+.modal-card h2 { margin: 0 0 18px; font-size: 18px; }
+.filter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.filter-opt {
+  padding: 18px 10px; border-radius: 12px; cursor: pointer;
+  background: rgba(56,189,248,.06); color: var(--text);
+  border: 1px solid var(--border); font-weight: 600;
+}
+.filter-opt:nth-child(3) { grid-column: span 2; }
+.filter-opt:hover { border-color: var(--sky); background: rgba(56,189,248,.14); }
+
+.btn-oauth { display:block; width:100%; padding:12px; margin-bottom:10px; border-radius:10px; border:none; cursor:pointer; font-weight:600; color:#fff; }
+.btn-oauth.discord { background:#5865f2; }
+.btn-oauth.github  { background:#24292e; }
+
+/* bottom-right admin trigger */
+.admin-trigger {
+  position: fixed; right: 0; bottom: 0;
+  width: 70px; height: 70px; z-index: 5000;
+  cursor: default;
+}
