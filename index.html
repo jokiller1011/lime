@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freedoms Arcade — Link Generator</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕹️</text></svg>">
+</head>
+<body>
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="spinner">
+      <div class="circle"></div><div class="circle"></div>
+      <div class="circle"></div><div class="circle"></div>
+    </div>
+    <p id="loading-text" class="loading-text">initializing</p>
+  </div>
+
+  <!-- Main App -->
+  <div id="app" class="hidden">
+    <div class="gen-card">
+      <h1 class="title">
+        <span class="white">freedoms arcade</span>
+        <span class="blue">v4</span>
+      </h1>
+
+      <!-- Step 1: Get Link Button -->
+      <div id="step-get-link">
+        <button id="btn-get-link" class="btn-primary">get my link</button>
+      </div>
+
+      <!-- Step 2: Filter Selection -->
+      <div id="step-filter" class="hidden">
+        <p class="subtitle">select your filter</p>
+        <div id="filter-grid" class="filter-grid"></div>
+      </div>
+
+      <!-- Step 3: Link Result (In-Box Loading) -->
+      <div id="step-result" class="hidden">
+        <div id="result-box" class="result-box">
+          <!-- In-box loading injected here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Trigger (bottom-right corner, hold 3s) -->
+    <div id="admin-trigger" class="admin-trigger"></div>
+  </div>
+
+  <!-- Admin Modal -->
+  <div id="admin-modal" class="modal hidden">
+    <div class="modal-content">
+      <div id="admin-404" class="admin-404">
+        <h2>404</h2>
+        <p>Not Found</p>
+        <input type="text" id="admin-code-input" placeholder="enter code" autocomplete="off">
+        <button id="admin-code-submit" class="btn-primary">submit</button>
+      </div>
+      <div id="admin-login" class="hidden">
+        <!-- Login form injected here -->
+      </div>
+      <div id="admin-panel" class="hidden">
+        <!-- Admin panel injected here -->
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
