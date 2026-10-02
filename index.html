@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freedoms Arcade | Link Gen</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕹️</text></svg>">
+</head>
+<body>
+
+  <!-- Standard Loading Overlay -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="spinner"></div>
+    <p id="loading-text" class="loading-text">initializing</p>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main-content" class="hidden">
+    <div class="portal-container">
+      <h1 class="logo-text">
+        <span class="white">freedoms arcade</span> <span class="blue">v4</span>
+      </h1>
+
+      <!-- Step 1: Get My Link -->
+      <button id="get-link-btn" class="primary-btn">get my link</button>
+
+      <!-- Step 2: Filter Selection -->
+      <div id="filter-selection" class="hidden">
+        <p class="prompt">which filter do you have?</p>
+        <div id="filter-grid" class="filter-grid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Step 3: In-Box Link Generation -->
+      <div id="inbox-container" class="inbox-container hidden">
+        <div class="inbox-space-bg"></div>
+        <div class="inbox-content">
+          <div class="inbox-spinner">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+          <p id="inbox-text" class="inbox-text">connecting to link gen</p>
+          <div id="link-result" class="link-result hidden">
+            <a id="generated-link" href="#" target="_blank" class="generated-link">open link</a>
+            <div class="feedback-buttons">
+              <button id="works-btn" class="feedback-btn works">it works</button>
+              <button id="broken-btn" class="feedback-btn broken">it doesn't work</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Access Trigger (Hold 3s in bottom right) -->
+      <div id="admin-trigger" class="admin-trigger"></div>
+    </div>
+  </div>
+
+  <!-- Admin Modal (404 Decoy) -->
+  <div id="admin-modal" class="modal hidden">
+    <div class="modal-content">
+      <p class="error-code">404</p>
+      <p class="error-msg">that's an error</p>
+      <input type="text" id="admin-code-input" placeholder="enter code..." class="admin-input">
+      <button id="admin-submit" class="primary-btn">submit</button>
+    </div>
+  </div>
+
+  <!-- Admin Auth Portal -->
+  <div id="admin-auth" class="modal hidden">
+    <div class="modal-content">
+      <h2>admin portal</h2>
+      <input type="email" id="admin-email" placeholder="email" class="admin-input">
+      <input type="password" id="admin-password" placeholder="password" class="admin-input">
+      <button id="admin-login-btn" class="primary-btn">login</button>
+    </div>
+  </div>
+
+  <!-- Admin Suite (Hidden initially) -->
+  <div id="admin-suite" class="admin-suite hidden">
+    <h1>Admin Suite</h1>
+    <div class="admin-tabs">
+      <button class="tab-btn active" data-tab="links">Links</button>
+      <button class="tab-btn" data-tab="accounts">Accounts</button>
+      <button class="tab-btn" data-tab="settings">Settings</button>
+    </div>
+    <div id="tab-links" class="tab-content active">
+      <div class="link-form">
+        <select id="new-link-filter">
+          <option value="Linewize">Linewize</option>
+          <option value="Lightspeed">Lightspeed</option>
+          <option value="Dyknow Cloud">Dyknow Cloud</option>
+          <option value="Senso Cloud">Senso Cloud</option>
+          <option value="Go Guardian">Go Guardian</option>
+          <option value="Securly">Securly</option>
+          <option value="ContentKeeper">ContentKeeper</option>
+          <option value="iBoss">iBoss</option>
+        </select>
+        <input type="text" id="new-link-url" placeholder="https://link.freedomsarcade.com/...">
+        <input type="text" id="new-link-notes" placeholder="Notes (optional)">
+        <button id="add-link-btn" class="primary-btn">Add Link</button>
+      </div>
+      <table id="links-table">
+        <thead>
+          <tr><th>Filter</th><th>URL</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div id="tab-accounts" class="tab-content">
+      <table id="accounts-table">
+        <thead>
+          <tr><th>Email</th><th>Provider</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div id="tab-settings" class="tab-content">
+      <label class="toggle">
+        <input type="checkbox" id="link-gen-enabled" checked>
+        <span>Link Generator Enabled</span>
+      </label>
+      <button id="save-settings-btn" class="primary-btn">Save Settings</button>
+    </div>
+  </div>
+
+  <script src="supabase-config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
