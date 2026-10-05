@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freedoms Arcade v4 - Admin Suite</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <header>
+      <h1>Admin Suite</h1>
+      <span class="badge">Freedoms Arcade v4</span>
+    </header>
+
+    <nav class="admin-nav">
+      <button class="nav-btn active" data-tab="links">Links</button>
+      <button class="nav-btn" data-tab="filters">Filters</button>
+      <button class="nav-btn" data-tab="users">Users</button>
+      <button class="nav-btn" data-tab="settings">Settings</button>
+    </nav>
+
+    <!-- Links Tab -->
+    <section class="tab-content active" id="tab-links">
+      <div class="section-header">
+        <h2>Manage Links</h2>
+        <button class="btn" id="addLinkBtn">+ Add Link</button>
+      </div>
+      <div class="add-link-form" id="addLinkForm" style="display:none;">
+        <input type="text" id="newLinkUrl" placeholder="https://example.com/arcade">
+        <select id="newLinkFilter">
+          <option value="">Select Filter</option>
+        </select>
+        <button class="btn" id="saveLinkBtn">Save</button>
+        <button class="btn btn-cancel" id="cancelLinkBtn">Cancel</button>
+      </div>
+      <div class="link-list" id="linkList"></div>
+    </section>
+
+    <!-- Filters Tab -->
+    <section class="tab-content" id="tab-filters">
+      <div class="section-header">
+        <h2>Manage Filters</h2>
+        <button class="btn" id="addFilterBtn">+ Add Filter</button>
+      </div>
+      <div class="add-link-form" id="addFilterForm" style="display:none;">
+        <input type="text" id="newFilterName" placeholder="Filter name">
+        <input type="number" id="newFilterStrength" placeholder="Strength (1-5)" min="1" max="5">
+        <button class="btn" id="saveFilterBtn">Save</button>
+        <button class="btn btn-cancel" id="cancelFilterBtn">Cancel</button>
+      </div>
+      <div class="filter-list" id="filterList"></div>
+    </section>
+
+    <!-- Users Tab -->
+    <section class="tab-content" id="tab-users">
+      <div class="section-header">
+        <h2>Manage Users</h2>
+        <input type="text" id="userSearch" placeholder="Search users...">
+      </div>
+      <div class="user-list" id="userList"></div>
+    </section>
+
+    <!-- Settings Tab -->
+    <section class="tab-content" id="tab-settings">
+      <div class="settings-grid">
+        <div class="setting-card">
+          <h3>Link Generator</h3>
+          <p>Enable or disable the public link generator.</p>
+          <label class="switch">
+            <input type="checkbox" id="genEnabled" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        <div class="setting-card">
+          <h3>Maintenance Mode</h3>
+          <p>Put the arcade into maintenance mode.</p>
+          <label class="switch">
+            <input type="checkbox" id="maintenanceMode">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
