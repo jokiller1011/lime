@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freedoms Arcade v4 - Link Generator</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gen-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 48px;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .gen-card h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .gen-card h1 .white { color: #ffffff; }
+    .gen-card h1 .blue { color: var(--primary-light); }
+
+    .gen-card p {
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      font-size: 0.95rem;
+    }
+
+    .btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px 40px;
+      border-radius: 100px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .btn:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .filter-select {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 12px;
+      background: #0f0f0f;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      font-size: 1rem;
+      margin-bottom: 24px;
+      outline: none;
+      transition: border-color 0.3s ease;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239ca3af' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+
+    .filter-select:focus {
+      border-color: var(--primary);
+    }
+
+    .filter-select option {
+      background: var(--bg-card);
+      color: var(--text);
+    }
+
+    .link-result {
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: 16px;
+      background: #0f0f0f;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      word-break: break-all;
+      display: none;
+    }
+
+    .link-result.visible {
+      display: block;
+    }
+
+    .link-result .link-url {
+      color: var(--primary-light);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      font-family: monospace;
+    }
+
+    .feedback-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .feedback-buttons .btn {
+      flex: 1;
+      padding: 10px;
+      font-size: 0.85rem;
+    }
+
+    .btn-success { background: #22c55e; }
+    .btn-success:hover { background: #16a34a; box-shadow: 0 8px 24px rgba(34, 197, 94, 0.3); }
+    .btn-fail { background: #ef4444; }
+    .btn-fail:hover { background: #dc2626; box-shadow: 0 8px 24px rgba(239, 68, 68, 0.3); }
+
+    /* Admin trigger area */
+    .admin-trigger {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    /* 404 Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .modal-overlay.visible {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .modal-box h2 {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #ef4444;
+      margin-bottom: 16px;
+    }
+
+    .modal-box p {
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .modal-box input {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 12px;
+      background: #0f0f0f;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      font-size: 1rem;
+      margin-bottom: 16px;
+      outline: none;
+      text-align: center;
+      letter-spacing: 0.5em;
+      font-weight: 700;
+    }
+
+    .modal-box input:focus {
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+    <p class="loading-text" id="loadingText">deploying proxy (this might take a sec)</p>
+  </div>
+
+  <!-- Main Card -->
+  <div class="gen-card" id="mainCard">
+    <h1>
+      <span class="white">freedoms arcade</span>
+      <span class="blue">v4</span>
+    </h1>
+    <p>Select your filter to get a working link.</p>
+
+    <select class="filter-select" id="filterSelect">
+      <option value="">-- Select your filter --</option>
+    </select>
+
+    <button class="btn" id="getLinkBtn">Get My Link</button>
+
+    <!-- In-Box Link Loading -->
+    <div class="inbox-loading" id="inboxLoading" style="display:none; margin-top: 24px;">
+      <!-- Dots injected by JS -->
+    </div>
+
+    <!-- Result -->
+    <div class="link-result" id="linkResult">
+      <p class="link-url" id="linkUrl"></p>
+      <div class="feedback-buttons">
+        <button class="btn btn-success" id="linkWorksBtn">✅ It Works</button>
+        <button class="btn btn-fail" id="linkFailsBtn">❌ Doesn't Work</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Trigger -->
+  <div class="admin-trigger" id="adminTrigger"></div>
+
+  <!-- 404 Modal -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="modal-box">
+      <h2>404</h2>
+      <p>Page not found. Enter access code.</p>
+      <input type="text" id="adminCodeInput" maxlength="3" placeholder="***">
+      <button class="btn" id="adminSubmitBtn">Submit</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
