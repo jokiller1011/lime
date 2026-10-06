@@ -1,0 +1,21 @@
+{
+  "name": "Freedom's Arcade",
+  "short_name": "Freedom's Arcade",
+  "description": "An experimental web proxy and arcade.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "https://cdn.simpleicons.org/gnometerminal/3b82f6",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn.simpleicons.org/gnometerminal/3b82f6",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
