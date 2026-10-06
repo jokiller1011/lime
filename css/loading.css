@@ -1,0 +1,169 @@
+/* ============================================
+   FREEDOMS ARCADE V4 - LOADING STYLES
+   ============================================ */
+
+/* --- Standard Loading Overlay --- */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 20, 0.55);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.loading-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+/* --- 4-Circle Spinner --- */
+.spinner {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  animation: spinner-rotate 2s linear infinite;
+}
+
+.spinner-circle {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #3b82f6;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
+}
+
+.spinner-circle:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); animation: pulse-1 1.6s ease-in-out infinite; }
+.spinner-circle:nth-child(2) { right: 0; top: 50%; transform: translateY(-50%); animation: pulse-2 1.6s ease-in-out infinite; }
+.spinner-circle:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); animation: pulse-3 1.6s ease-in-out infinite; }
+.spinner-circle:nth-child(4) { left: 0; top: 50%; transform: translateY(-50%); animation: pulse-4 1.6s ease-in-out infinite; }
+
+@keyframes spinner-rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes pulse-1 {
+  0%, 100% { width: 18px; height: 18px; opacity: 1; }
+  50%      { width: 10px; height: 10px; opacity: 0.5; }
+}
+@keyframes pulse-2 {
+  0%, 100% { width: 18px; height: 18px; opacity: 1; }
+  50%      { width: 10px; height: 10px; opacity: 0.5; }
+}
+@keyframes pulse-3 {
+  0%, 100% { width: 18px; height: 18px; opacity: 1; }
+  50%      { width: 10px; height: 10px; opacity: 0.5; }
+}
+@keyframes pulse-4 {
+  0%, 100% { width: 18px; height: 18px; opacity: 1; }
+  50%      { width: 10px; height: 10px; opacity: 0.5; }
+}
+
+/* --- Loading Text --- */
+.loading-text {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.04em;
+  text-align: center;
+  max-width: 320px;
+  transition: opacity 0.3s ease;
+}
+
+.loading-progress {
+  width: 200px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.loading-progress::after {
+  content: '';
+  display: block;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #3b82f6, transparent);
+  border-radius: 3px;
+  animation: progress-slide 1.4s ease-in-out infinite;
+}
+
+@keyframes progress-slide {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+/* --- In-Box Loading (Space Theme) --- */
+.in-box-loading-anim {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(10, 10, 25, 0.92);
+  border-radius: inherit;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.dots-container {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  overflow: hidden;
+}
+
+.dot {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #60a5fa;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #60a5fa, 0 0 12px rgba(96, 165, 250, 0.4);
+  animation: zoom-by 1.2s linear infinite;
+}
+
+.dot:nth-child(1) { animation-delay: 0s;    top: 10%; left: -5%; }
+.dot:nth-child(2) { animation-delay: 0.2s;  top: 35%; left: -5%; }
+.dot:nth-child(3) { animation-delay: 0.4s;  top: 60%; left: -5%; }
+.dot:nth-child(4) { animation-delay: 0.6s;  top: 20%; left: -5%; }
+.dot:nth-child(5) { animation-delay: 0.8s;  top: 75%; left: -5%; }
+.dot:nth-child(6) { animation-delay: 1.0s;  top: 50%; left: -5%; }
+
+@keyframes zoom-by {
+  0%   { transform: translateX(0) scale(0.5); opacity: 0; }
+  15%  { opacity: 1; }
+  50%  { transform: translateX(300px) scale(1.5); opacity: 0.8; }
+  100% { transform: translateX(600px) scale(0.3); opacity: 0; }
+}
+
+.in-box-text {
+  font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 13px;
+  color: rgba(147, 197, 253, 0.85);
+  letter-spacing: 0.03em;
+}
+
+/* --- Site Loading specific --- */
+.site-loading .spinner-circle {
+  background: #60a5fa;
+}
+
+/* --- Utility --- */
+.hidden { display: none !important; }
