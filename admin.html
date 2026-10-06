@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freedom's Arcade v4 — Admin</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .admin-dashboard { max-width: 1200px; margin: 0 auto; padding: 32px; }
+    .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+    .admin-tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .admin-tab { padding: 10px 20px; border-radius: 10px; background: var(--surface-2); border: 1px solid transparent; cursor: pointer; color: var(--text); font-family: inherit; }
+    .admin-tab.active { border-color: var(--accent); background: rgba(59,130,246,0.15); color: #60a5fa; }
+    .admin-panel { background: var(--surface); border-radius: 16px; padding: 24px; border: 1px solid rgba(59,130,246,0.1); }
+    .admin-panel h3 { margin-bottom: 16px; color: #60a5fa; }
+    .admin-input { width: 100%; padding: 12px; background: #0d0d14; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; color: var(--text); margin-bottom: 12px; font-family: inherit; }
+    .admin-input:focus { outline: none; border-color: var(--accent); }
+    .admin-row { display: flex; gap: 12px; align-items: center; }
+    .admin-list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .admin-badge { padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; }
+    .badge-active { background: rgba(34,197,94,0.15); color: #22c55e; }
+    .badge-inactive { background: rgba(239,68,68,0.15); color: #ef4444; }
+    .admin-select { padding: 10px; background: #0d0d14; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; color: var(--text); font-family: inherit; }
+  </style>
+</head>
+<body>
+  <div class="admin-dashboard">
+    <div class="admin-header">
+      <h1>Freedom's Arcade <span style="color:#60a5fa">Admin</span></h1>
+      <button class="portal-btn small" id="admin-logout">Logout</button>
+    </div>
+
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="links">Unblocker Links</button>
+      <button class="admin-tab" data-tab="filters">Filters</button>
+      <button class="admin-tab" data-tab="users">Users</button>
+      <button class="admin-tab" data-tab="settings">Settings</button>
+    </div>
+
+    <!-- Links Panel -->
+    <div class="admin-panel" id="panel-links">
+      <h3>Add Unblocker Link</h3>
+      <input type="text" class="admin-input" id="link-url" placeholder="https://example.com/unblocker">
+      <select class="admin-select" id="link-filter" style="margin-bottom:12px;width:100%">
+        <option value="">-- Select Filter --</option>
+      </select>
+      <button class="portal-btn small" id="add-link-btn">Add Link</button>
+
+      <h3 style="margin-top:32px">Existing Links</h3>
+      <div id="links-list"></div>
+    </div>
+
+    <!-- Filters Panel -->
+    <div class="admin-panel hidden" id="panel-filters">
+      <h3>Manage Filters</h3>
+      <div id="filters-admin-list"></div>
+    </div>
+
+    <!-- Users Panel -->
+    <div class="admin-panel hidden" id="panel-users">
+      <h3>Users</h3>
+      <div id="users-list"></div>
+    </div>
+
+    <!-- Settings Panel -->
+    <div class="admin-panel hidden" id="panel-settings">
+      <h3>Site Settings</h3>
+      <div id="settings-list"></div>
+    </div>
+  </div>
+
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>
